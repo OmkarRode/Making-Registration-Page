@@ -1,6 +1,4 @@
 const posts=[
-    {title:'post one',body:'this is first post' ,CreatedAt:new Date().getTime()},
-    {title:'post two',body:'this is second post',CreatedAt:new Date().getTime()}
 ]
 
 function getPost(){
@@ -16,7 +14,7 @@ function getPost(){
         
 }
 
-function setPost(post){
+function createPost(post){
    return new Promise((resolve,reject)=>{
     setTimeout(() => {
         posts.push({...post,CreatedAt:new Date().getTime()});
@@ -38,11 +36,31 @@ function setPost(post){
    })
     
 }
-const Promise1=Promise.resolve('hello word');
-const Promise2=10;
-const Promise3=new Promise((resolve,reject)=>setTimeout(resolve,2000,'Goodbye'));
 
-const Promise4= fetch('https://jsonplaceholder.typicode.com/todos/1')  .then(res => res.json())
+function resolveFullFill()
+{
+    getPost();
+    let time=new Date().getTime();
+    console.log(`last active time : ${time}`)
+}
 
-Promise.all([Promise1,Promise2,Promise3,Promise4]).then((values)=> console.log(values));
-
+function deletePost(){
+    return new Promise((resolve,reject)=>{
+        setTimeout(() => {
+        if(posts.length!=0)
+        {
+            posts.pop();
+            getPost();
+            resolve()
+        }
+        else
+        {
+            reject('array is empty')
+        }
+    },5000);
+    })
+}
+createPost({title:'post first',body:'this is post first'}).then(resolveFullFill).catch(result => console.log( `${result}`));
+createPost({title:'post second',body:'this is post second'}).then(resolveFullFill).catch(result => console.log( `${result}`));
+createPost({title:'post third',body:'this is post third'}).then(resolveFullFill).catch(result => console.log( `${result}`));
+deletePost().then(getPost);
