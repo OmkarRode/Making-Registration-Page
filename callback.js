@@ -41,6 +41,7 @@ function setPost(post){
 
 function deletePost(){
     return new Promise((resolve,reject)=>{
+        setTimeout(() => {
         if(posts.length!=0)
         {
             posts.pop();
@@ -50,6 +51,7 @@ function deletePost(){
         {
             reject('array is empty')
         }
+    },1000);
     })
 }
 
