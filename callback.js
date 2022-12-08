@@ -21,7 +21,7 @@ function setPost(post){
     setTimeout(() => {
         posts.push({...post,CreatedAt:new Date().getTime()});
        
-        let error=true;
+        let error=false;
         if(!error)
         {
             resolve();
@@ -55,8 +55,12 @@ function deletePost(){
     })
 }
 
-// setPost({title:'post three',body:'this is post three'}).then(getPost).catch(result => console.log( `${result}`));
-deletePost().then(getPost).catch(result => console.log( `${result}`));
-deletePost().then(getPost).catch(result => console.log( `${result}`));
-deletePost().then(getPost).catch(result => console.log( `${result}`));
+setPost({title:'post three',body:'this is post three'}).then(getPost).catch(result => console.log( `${result}`));
+setPost({title:'post four',body:'this is post four'}).then(()=>{
+    setTimeout(()=>{deletePost()},1000)
+}).catch(result => console.log( `${result}`));
+
+// deletePost().then(getPost).catch(result => console.log( `${result}`));
+// deletePost().then(getPost).catch(result => console.log( `${result}`));
+// deletePost().then(getPost).catch(result => console.log( `${result}`));
 
