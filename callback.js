@@ -3,7 +3,7 @@ const posts=[
     {title:'post two',body:'this is second post',CreatedAt:new Date().getTime()}
 ]
 
-function getPost(flagid=0){
+function getPost(){
     setInterval(()=>{
 
         let output='';
@@ -16,21 +16,27 @@ function getPost(flagid=0){
         
 }
 
-function setPost(post,callback){
+function setPost(post){
+   return new Promise((resolve,reject)=>{
     setTimeout(() => {
         posts.push({...post,CreatedAt:new Date().getTime()});
-        callback();
+       
+        let error=true;
+        if(!error)
+        {
+            resolve();
+           
+        }
+        else
+        {
+            reject("something error here")
+        }
+        
     }, 2000);
+    
+
+   })
+    
 }
 
-function create4Post(post,callback)
-{
-    setTimeout(() => {
-        posts.push({...post,CreatedAt:new Date().getTime()});
-        callback();
-    }, 6000);
-}
-
-getPost();
-setPost({title:'post three',body:'this is post three'},getPost);
-create4Post({title:'post four',body:'this is post three'},getPost);
+setPost({title:'post three',body:'this is post three'}).then(getPost).catch(result => console.log( `${result}`));
