@@ -39,4 +39,22 @@ function setPost(post){
     
 }
 
-setPost({title:'post three',body:'this is post three'}).then(getPost).catch(result => console.log( `${result}`));
+function deletePost(){
+    return new Promise((resolve,reject)=>{
+        if(posts.length!=0)
+        {
+            posts.pop();
+            resolve()
+        }
+        else
+        {
+            reject('array is empty')
+        }
+    })
+}
+
+// setPost({title:'post three',body:'this is post three'}).then(getPost).catch(result => console.log( `${result}`));
+deletePost().then(getPost).catch(result => console.log( `${result}`));
+deletePost().then(getPost).catch(result => console.log( `${result}`));
+deletePost().then(getPost).catch(result => console.log( `${result}`));
+
