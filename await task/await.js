@@ -40,18 +40,17 @@ console.log('person2: shows ticket');
 const Premovie =async () => {
     const promiseWifeBringingTicks= new Promise((resolve,reject)=>{
         setTimeout(()=>{
-            resolve('ticket');
+            reject('ticket');
         },3000)
         });
+        let ticket
+        try{
+            ticket = await promiseWifeBringingTicks;
+        }catch(e)
+        {
+            ticket = `sad face`;
+        }
 
-        const getPopcorn = new Promise((resolve,reject) => resolve(`popcorn`));
-        const getCandy = new Promise((resolve,reject) => resolve(`candy`));
-        const getCoke  = new Promise((resolve,reject) => resolve(`coke`));
-
-        let ticket = await promiseWifeBringingTicks;
-
-        let [popcorn,candy,coke] = await Promise.all([getPopcorn,getCandy,getCoke]);
-        console.log(`${popcorn} , ${candy} , ${coke}`);
         return ticket;
 }
 
